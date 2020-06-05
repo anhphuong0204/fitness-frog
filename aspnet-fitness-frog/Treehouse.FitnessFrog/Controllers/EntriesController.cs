@@ -44,6 +44,7 @@ namespace Treehouse.FitnessFrog.Controllers
             Entry entry = new Entry()
             {
                 Date = DateTime.Today,
+                ActivityId = 2,
             };
             return View(entry);
         }
@@ -51,7 +52,11 @@ namespace Treehouse.FitnessFrog.Controllers
         [HttpPost]
         public ActionResult Add(Entry entry)
         {
-            return View();
+            if (ModelState.IsValid)
+                _entriesRepository.AddEntry(entry);
+            else
+                return View(entry);
+            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int? id)
