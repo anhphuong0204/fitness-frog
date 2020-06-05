@@ -44,8 +44,9 @@ namespace Treehouse.FitnessFrog.Controllers
             Entry entry = new Entry()
             {
                 Date = DateTime.Today,
-                ActivityId = 2,
             };
+            ViewBag.ActivityDropDownListItems = new SelectList(Data.Data.Activities, "Id", "Name");
+
             return View(entry);
         }
 
@@ -53,10 +54,13 @@ namespace Treehouse.FitnessFrog.Controllers
         public ActionResult Add(Entry entry)
         {
             if (ModelState.IsValid)
+            {
                 _entriesRepository.AddEntry(entry);
-            else
-                return View(entry);
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            ViewBag.ActivityDropDownListItems = new SelectList(Data.Data.Activities, "Id", "Name");
+            return View(entry);
+
         }
 
         public ActionResult Edit(int? id)
