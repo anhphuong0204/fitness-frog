@@ -45,7 +45,7 @@ namespace Treehouse.FitnessFrog.Controllers
             {
                 Date = DateTime.Today,
             };
-            ViewBag.ActivityDropDownListItems = new SelectList(Data.Data.Activities, "Id", "Name");
+            SetupActivitiesSelectListItems();
 
             return View(entry);
         }
@@ -118,7 +118,7 @@ namespace Treehouse.FitnessFrog.Controllers
 
         private void SetupActivitiesSelectListItems()
         {
-            SetupActivitiesSelectListItems();
+            ViewBag.ActivityDropDownListItems = new SelectList(Data.Data.Activities, "Id", "Name");
         }
     }
 }
